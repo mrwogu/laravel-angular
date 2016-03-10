@@ -13,16 +13,19 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix
-	.less('app.less')
-	.scripts([
-		'../bower/angular/angular.js',
-		'../bower/angular-animate/angular-animate.js',
-		'../bower/angular-bootstrap/ui-bootstrap.js',
-		'../bower/angular-bootstrap/ui-bootstrap-tpls.js',
-		'../bower/angular-messages/angular-messages.js',
-		'../bower/angular-resource/angular-resource.js',
-		'../bower/angular-route/angular-route.js',
-		'../bower/angular-touch/angular-touch.js',
-		'../angular-app/app.js'
-	]);
+		.less('app.less')
+		.scripts([
+			'../bower/angular/angular.js',
+			'../bower/angular-animate/angular-animate.js',
+			'../bower/angular-aria/angular-aria.js',
+			'../bower/angular-material/angular-material.js',
+			'../bower/angular-messages/angular-messages.js',
+			'../bower/angular-resource/angular-resource.js',
+			'../bower/angular-route/angular-route.js',
+			'../angular-app/Users.js',
+			'../angular-app/UserService.js',
+			'../angular-app/UserController.js',
+			'../angular-app/app.js'
+		])
+	;
 });

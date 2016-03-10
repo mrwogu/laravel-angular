@@ -11,11 +11,7 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'AppController@index');
 
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+Blade::setContentTags('<%', '%>');        		// for variables and all things Blade
+Blade::setEscapedContentTags('<%%', '%%>');   	// for escaped data
