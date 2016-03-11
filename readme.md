@@ -1,4 +1,4 @@
-# Laravel 5.2 REST API + AngularJS 1.5 App
+# Laravel 5.2 REST API + AngularJS 1.5 App + ngMaterial 1.0.6
 
 #### Installation
 ```sh
