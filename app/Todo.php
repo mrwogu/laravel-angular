@@ -6,4 +6,7 @@ class Todo extends Model {
 
     protected $collection = 'todos';
 
+    protected $casts = [
+        'completed' => 'boolean'
+    ];
 }

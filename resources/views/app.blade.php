@@ -15,7 +15,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-app="app" layout="column" ng-controller="mainCtrl">
+<body ng-app="app" layout="column" ng-controller="mainCtrl" ng-cloak>
 
 <md-toolbar layout="row" layout-align="center">
     <md-button class="menu" hide-gt-sm ng-click="toggleTodo()" aria-label="Show todo groups">

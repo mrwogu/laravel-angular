@@ -23166,13 +23166,6 @@ md-tooltip {
   .hide-print:not(.show-print):not(.show) {
     display: none !important; } }
 
-/*!
- * Angular Material Design
- * https://github.com/angular/material
- * @license MIT
- * v1.0.6
- */
-
 html,
 body {
   font-family: 'Roboto', sans-serif;
@@ -23563,6 +23556,14 @@ label[for='toggle-all'] {
   #filters {
     bottom: 10px;
   }
+}
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
 }
 
 /*# sourceMappingURL=app.css.map */
