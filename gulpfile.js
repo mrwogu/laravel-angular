@@ -22,10 +22,9 @@ elixir(function(mix) {
 			'../bower/angular-messages/angular-messages.js',
 			'../bower/angular-resource/angular-resource.js',
 			'../bower/angular-route/angular-route.js',
-			'../angular-app/Users.js',
-			'../angular-app/UserService.js',
-			'../angular-app/UserController.js',
 			'../angular-app/app.js'
 		])
+		.copy('resources/assets/angular-app/views', 'public/views')
+		.version(["css/app.css", "js/all.js"]);
 	;
 });

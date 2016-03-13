@@ -1,0 +1,46 @@
+<md-content>
+    <section id="todoapp">
+        <header id="header">
+            <form id="todo-form" ng-submit="addTodo()">
+                <input id="new-todo" placeholder="Co powinienem zrobić?" ng-model="newTodo" ng-disabled="saving" autofocus>
+            </form>
+        </header>
+        <section id="main" ng-show="todos.length" ng-cloak>
+            <input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
+            <label for="toggle-all">Oznacz wszystkie jako wykonane</label>
+            <ul id="todo-list">
+                <li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+                    <div class="view">
+                        <md-checkbox class="toggle" ng-model="todo.completed" ng-change="toggleCompleted(todo)" aria-label="Checkbox 1"></md-checkbox>
+                        <label ng-dblclick="editTodo(todo)">{{todo.title}}</label>
+                        <md-button class="md-fab md-mini destroy" layout-align="right" aria-label="Remove" ng-click="removeTodo(todo)">
+                            <md-icon md-svg-src="img/svg/trash.svg"></md-icon>
+                        </md-button>
+                    </div>
+                    <form ng-submit="saveEdits(todo, 'submit')">
+                        <input class="edit" ng-trim="false" ng-model="todo.title" todo-escape="revertEdits(todo)" ng-blur="saveEdits(todo, 'blur')"
+                               todo-focus="todo == editedTodo">
+                    </form>
+                </li>
+            </ul>
+        </section>
+        <footer id="footer" ng-show="todos.length" ng-cloak>
+					<span id="todo-count"><strong>{{remainingCount}}</strong>
+						<ng-pluralize count="remainingCount"
+                                      when="{ 1: 'niewykonany', 2: 'niewykonane', 3: 'niewykonane', 4: 'niewykonane', other: 'niewykonanych' }"></ng-pluralize>
+					</span>
+            <ul id="filters">
+                <li>
+                    <a ng-class="{selected: status == ''} " href="#/">Wszystkie</a>
+                </li>
+                <li>
+                    <a ng-class="{selected: status == 'active'}" href="#/active">W trakcie</a>
+                </li>
+                <li>
+                    <a ng-class="{selected: status == 'completed'}" href="#/completed">Zakończone</a>
+                </li>
+            </ul>
+            <md-button id="clear-completed" layout-align="right" ng-click="clearCompletedTodos()" class="md-raised" ng-show="completedCount">Wyczyść zakończone</md-button>
+        </footer>
+    </section>
+</md-content>

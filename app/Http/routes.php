@@ -13,5 +13,8 @@
 
 Route::get('/', 'AppController@index');
 
+Route::resource('api/todos', 'TodosController', array('except' => array('create', 'edit')));
+Route::delete('api/todos', 'TodosController@removeAll');
+
 Blade::setContentTags('<%', '%>');        		// for variables and all things Blade
 Blade::setEscapedContentTags('<%%', '%%>');   	// for escaped data

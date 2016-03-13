@@ -15,3 +15,6 @@ storage/
 
 # Bower Components
 resources/assets/bower/
+
+# IDE
+.idea/
