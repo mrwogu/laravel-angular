@@ -16,6 +16,7 @@ require('laravel-elixir-vue-2');
 elixir(function(mix) {
     mix
 		.less('app.less')
+		.sass('layout.scss')
 		.scripts([
 			'../bower/angular/angular.js',
 			'../bower/angular-animate/angular-animate.js',
@@ -26,6 +27,7 @@ elixir(function(mix) {
 			'../bower/angular-route/angular-route.js',
 			'../angular-app/app.js'
 		])
+		.webpack('app.js')
 		.copy('resources/assets/angular-app/views', 'public/views')
 		.version(["css/app.css", "js/all.js"]);
 	;

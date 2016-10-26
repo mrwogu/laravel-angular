@@ -61982,7 +61982,10 @@ function ngViewFillContentFactory($compile, $controller, $route) {
         'ngRoute'
     ]);
 
-    app.config(function ($routeProvider, $mdIconProvider, $mdThemingProvider) {
+    app.config(function ($interpolateProvider, $routeProvider, $mdIconProvider, $mdThemingProvider) {
+
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
 
         var routeConfig = {
             controller: 'TodoCtrl',

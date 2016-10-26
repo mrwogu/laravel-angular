@@ -12,7 +12,7 @@
                 <li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
                     <div class="view">
                         <md-checkbox class="toggle" ng-model="todo.completed" ng-change="toggleCompleted(todo)" aria-label="Checkbox 1"></md-checkbox>
-                        <label ng-dblclick="editTodo(todo)">{{todo.title}}</label>
+                        <label ng-dblclick="editTodo(todo)"><%todo.title%></label>
                         <md-button class="md-fab md-mini destroy" layout-align="right" aria-label="Remove" ng-click="removeTodo(todo)">
                             <md-icon md-svg-src="img/svg/trash.svg"></md-icon>
                         </md-button>
@@ -25,7 +25,7 @@
             </ul>
         </section>
         <footer id="footer" ng-show="todos.length" ng-cloak>
-					<span id="todo-count"><strong>{{remainingCount}}</strong>
+					<span id="todo-count"><strong><%remainingCount%></strong>
 						<ng-pluralize count="remainingCount"
                                       when="{ 1: 'niewykonany', 2: 'niewykonane', 3: 'niewykonane', 4: 'niewykonane', other: 'niewykonanych' }"></ng-pluralize>
 					</span>

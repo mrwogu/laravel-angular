@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Zrób APP</title>
 
-    <link href="<% elixir('css/app.css') %>" rel="stylesheet">
+    <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,9 +40,9 @@
         </md-toolbar>
 
         <md-list flex>
-            <md-list-item class="md-3-line" ng-click="showAlert($event)">
+            <md-list-item class="md-3-line">
                 <div class="md-list-item-text" layout="column">
-                    <h3>Zaloguj się</h3>
+                    <h3>Wyloguj się</h3>
                 </div>
             </md-list-item>
             <md-list-item class="md-3-line" ng-click="showAlert($event)">
@@ -68,6 +68,6 @@
     <ng-view flex class="md-padding"></ng-view>
 </div>
 <!-- Scripts -->
-<script src="<% elixir('js/all.js') %>"></script>
+<script src="{{ elixir('js/all.js') }}"></script>
 </body>
 </html>
