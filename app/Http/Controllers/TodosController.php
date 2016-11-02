@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Todo;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TodosController extends Controller {
 
@@ -25,7 +26,7 @@ class TodosController extends Controller {
 	 */
 	public function index()
 	{
-		return response()->json(Todo::all());
+		return response()->json(Auth::user()->todos()->get());
 	}
 
 	/**
@@ -36,8 +37,8 @@ class TodosController extends Controller {
 	public function store(Request $request)
 	{
 		$d = new Todo();
-		$d->completed = false;
-		$d->title = $request->input('title');
+		$d->fill($request->all());
+		$d->user_id = Auth::user()->id;
 		$d->save();
 
 		return response()->json($d);
@@ -51,7 +52,7 @@ class TodosController extends Controller {
 	 */
 	public function show($id)
 	{
-		return response()->json(Todo::find($id));
+		return response()->json(Todo::where('user_id' , Auth::user()->id)->findOrFail($id));
 	}
 
 	/**
@@ -60,11 +61,10 @@ class TodosController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, Request $request)
 	{
-		$todo = Todo::find($id);
-		$todo->title = \Input::get('title');
-		$todo->completed = \Input::get('completed');
+		$todo = Todo::where('user_id' , Auth::user()->id)->findOrFail($id);
+		$todo->fill($request->all());
 		$todo->save();
 
 		return response()->json($todo);
@@ -78,14 +78,14 @@ class TodosController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$d = Todo::find($id);
+		$d = Todo::where('user_id' , Auth::user()->id)->findOrFail($id);
 		$d->delete();
 		return response()->json(['status' => 'deleted']);
 	}
 
 	public function removeAll()
 	{
-		$deletedRows = Todo::where('completed', true)->delete();
+		$deletedRows = Todo::where('user_id' , Auth::user()->id)->where('completed', true)->delete();
 		return response()->json(['deleted' => $deletedRows]);
 	}
 
