@@ -20683,7 +20683,17 @@ label[for='toggle-all'] {
   right: 0;
   bottom: 0;
 }
-#todo-list li:hover .destroy {
+#todo-list li .alarm {
+  display: none;
+  position: absolute;
+  right: 60px;
+  bottom: 0;
+}
+#todo-list li .alarm.has-alarm {
+  display: block;
+}
+#todo-list li:hover .destroy,
+#todo-list li:hover .alarm {
   display: block;
 }
 #todo-list li .edit {
@@ -20799,6 +20809,16 @@ label[for='toggle-all'] {
 .ng-cloak,
 .x-ng-cloak {
   display: none !important;
+}
+input.timeinput {
+  width: 35px;
+  height: 31px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  box-sizing: border-box;
+  box-shadow: none;
+  outline: none;
 }
 
 /*# sourceMappingURL=app.css.map */

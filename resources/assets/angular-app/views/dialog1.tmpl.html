@@ -1,0 +1,71 @@
+<md-dialog aria-label="Ustaw przypomnienie" flex="25">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Ustaw przypomnienie</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/svg/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <md-radio-group ng-model="reminder.type">
+                    <md-radio-button value="datetime">O czasie</md-radio-button>
+                    <md-radio-button value="localization">W miejscu</md-radio-button>
+                </md-radio-group>
+
+                <div flex-gt-xs ng-if="reminder.type == 'datetime'">
+                    <h4>Data przypomnienia</h4>
+                    <md-datepicker ng-model="reminder.date" md-placeholder="Wybierz datę"
+                                   md-min-date="reminder.mindate" md-open-on-focus></md-datepicker>
+
+                    <input type="number" max="23" min="0" class="timeinput" ng-model="reminder.hour" placeholder="HH" />:
+                    <input type="number" min="0" max="59" class="timeinput" ng-model="reminder.minute" placeholder="MM" />
+                </div>
+
+                <div ng-if="reminder.type == 'localization'">
+                    <div ng-hide="todo.latitude && todo.longitude">
+                        <h4>Adres miejsca przypomnienia</h4>
+                        <md-content layout-gt-sm="row" layout-padding>
+                            <md-input-container>
+                                <label>Adres</label>
+                                <input type="text" ng-model="reminder.address" />
+                            </md-input-container>
+                        </md-content>
+                    </div>
+
+                    <h4>Współrzędne przypomnienia</h4>
+                    <md-content layout-gt-sm="row" layout-padding>
+                        <div>
+                            <md-input-container>
+                                <label>Latitude</label>
+                                <input type="text" ng-model="reminder.latitude" />
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label>Longitude</label>
+                                <input type="text" ng-model="reminder.longitude" />
+                            </md-input-container>
+                        </div>
+                    </md-content>
+
+                </div>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="remove()" ng-if="todo.ring || (todo.latitude && todo.longitude)">
+                Wyłącz przypomnienie
+            </md-button>
+            <span flex></span>
+            <md-button ng-click="save(reminder)">
+                Zapisz
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

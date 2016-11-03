@@ -13,6 +13,11 @@
                     <div class="view">
                         <md-checkbox class="toggle" ng-model="todo.completed" ng-change="toggleCompleted(todo)" aria-label="Checkbox 1"></md-checkbox>
                         <label ng-dblclick="editTodo(todo)"><%todo.title%></label>
+
+                        <md-button class="md-fab md-mini alarm" ng-class="{'has-alarm': todo.ring || (todo.latitude && todo.longitude)}" layout-align="right" aria-label="Reminder" ng-click="setReminder($event, todo)">
+                            <md-icon md-svg-src="img/svg/alarm_add.svg"></md-icon>
+                        </md-button>
+
                         <md-button class="md-fab md-mini destroy" layout-align="right" aria-label="Remove" ng-click="removeTodo(todo)">
                             <md-icon md-svg-src="img/svg/trash.svg"></md-icon>
                         </md-button>

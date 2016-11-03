@@ -18,13 +18,13 @@ elixir(function(mix) {
 		.less('app.less')
 		.sass('layout.scss')
 		.scripts([
-			'../bower/angular/angular.js',
-			'../bower/angular-animate/angular-animate.js',
-			'../bower/angular-aria/angular-aria.js',
-			'../bower/angular-material/angular-material.js',
-			'../bower/angular-messages/angular-messages.js',
-			'../bower/angular-resource/angular-resource.js',
-			'../bower/angular-route/angular-route.js',
+			'../bower/angular/angular.min.js',
+			'../bower/angular-animate/angular-animate.min.js',
+			'../bower/angular-aria/angular-aria.min.js',
+			'../bower/angular-material/angular-material.min.js',
+			'../bower/angular-messages/angular-messages.min.js',
+			'../bower/angular-resource/angular-resource.min.js',
+			'../bower/angular-route/angular-route.min.js',
 			'../angular-app/app.js'
 		])
 		.webpack('app.js')

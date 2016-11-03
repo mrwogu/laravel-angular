@@ -330,8 +330,21 @@ label[for='toggle-all'] {
   bottom: 0;
 }
 
-#todo-list li:hover .destroy {
-  display: block;
+#todo-list li .alarm {
+  display: none;
+  position: absolute;
+  right: 60px;
+  bottom: 0;
+
+  &.has-alarm {
+    display: block;
+  }
+}
+
+#todo-list li:hover {
+  .destroy, .alarm {
+    display: block;
+  }
 }
 
 #todo-list li .edit {
@@ -466,4 +479,15 @@ label[for='toggle-all'] {
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+input.timeinput {
+  width: 35px;
+  height: 31px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  box-sizing: border-box;
+  box-shadow: none;
+  outline: none;
 }

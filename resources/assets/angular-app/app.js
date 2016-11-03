@@ -1,6 +1,25 @@
 (function (angular) {
     'use strict';
 
+    /**
+     * You first need to create a formatting function to pad numbers to two digits…
+     **/
+    function twoDigits(d) {
+        if(0 <= d && d < 10) return "0" + d.toString();
+        if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+        return d.toString();
+    }
+
+    /**
+     * …and then create the method to output the date string as desired.
+     * Some people hate using prototypes this way, but if you are going
+     * to apply this to more than one Date object, having it as a prototype
+     * makes sense.
+     **/
+    Date.prototype.toMysqlFormat = function() {
+        return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+    };
+    
     var app = angular.module('app', [
         'ngAnimate',
         'ngAria',
@@ -72,7 +91,7 @@
         };
     });
 
-    app.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, store) {
+    app.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, store, $mdDialog) {
         'use strict';
 
         var todos = $scope.todos = store.todos;
@@ -162,6 +181,63 @@
 
         $scope.removeTodo = function (todo) {
             store.delete(todo);
+        };
+        
+        // Add geolocation set
+        // Put
+        $scope.setReminder = function (ev, todo) {
+            $mdDialog.show({
+                    controller: function ($scope, $mdDialog) {
+                        $scope.todo = todo;
+                        $scope.reminder = {
+                            type: ($scope.todo.latitude && $scope.todo.longitude) ? 'localization': 'datetime',
+                            mindate: new Date(),
+                            date: $scope.todo.ring ? new Date($scope.todo.ring) : new Date(),
+                            hour: $scope.todo.ring ? new Date($scope.todo.ring).getHours() : new Date().getHours(),
+                            minute: $scope.todo.ring ? new Date($scope.todo.ring).getMinutes() : new Date().getMinutes(),
+                            latitude: $scope.todo.latitude,
+                            longitude: $scope.todo.longitude
+                        };
+
+                        $scope.hide = function() {
+                            $mdDialog.hide();
+                        };
+
+                        $scope.remove = function() {
+                            $scope.todo.ring = null;
+                            $scope.todo.latitude = null;
+                            $scope.todo.longitude = null;
+
+                            $mdDialog.hide($scope.todo);
+                        };
+
+                        $scope.cancel = function() {
+                            $mdDialog.cancel();
+                        };
+
+                        $scope.save = function(reminder) {
+                            if (reminder.type == 'datetime') {
+                                var ring = reminder.date.setHours(reminder.hour, reminder.minute);
+                                $scope.todo.ring = new Date(ring).toMysqlFormat();
+                            } else {
+                                $scope.todo.latitude = reminder.latitude;
+                                $scope.todo.longitude = reminder.longitude;
+                            }
+
+                            $mdDialog.hide($scope.todo);
+                        };
+                    },
+                    templateUrl: './views/dialog1.tmpl.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: false,
+                    fullscreen: true // Only for -xs, -sm breakpoints.
+                })
+                .then(function(todo) {
+                    $scope.saveTodo(todo);
+                }, function() {
+                    console.log('You cancelled the dialog.');
+                });
         };
 
         $scope.saveTodo = function (todo) {
