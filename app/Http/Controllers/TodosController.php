@@ -26,7 +26,7 @@ class TodosController extends Controller {
 	 */
 	public function index()
 	{
-		return response()->json(Auth::user()->todos()->get());
+		return response()->json(Auth::user()->todos()->orderBy('id', 'DESC')->get());
 	}
 
 	/**

@@ -40,25 +40,9 @@
         </md-toolbar>
 
         <md-list flex>
-            <md-list-item class="md-3-line">
+            <md-list-item class="md-3-line" ng-click="logout($event)">
                 <div class="md-list-item-text" layout="column">
                     <h3>Wyloguj się</h3>
-                </div>
-            </md-list-item>
-            <md-list-item class="md-3-line" ng-click="showAlert($event)">
-                <div class="md-list-item-text" layout="column">
-                    <h3>Opcje</h3>
-                </div>
-            </md-list-item>
-            <md-subheader class="md-no-sticky">Kategorie</md-subheader>
-            <md-list-item class="md-3-line" ng-click="showAlert($event)">
-                <div class="md-list-item-text" layout="column">
-                    <h3>Inspiracje</h3>
-                </div>
-            </md-list-item>
-            <md-list-item class="md-3-line" ng-click="showAlert($event)">
-                <div class="md-list-item-text" layout="column">
-                    <h3>Osobiste</h3>
                 </div>
             </md-list-item>
         </md-list>

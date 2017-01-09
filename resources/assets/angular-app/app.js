@@ -17,7 +17,7 @@
      * makes sense.
      **/
     Date.prototype.toMysqlFormat = function() {
-        return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+        return this.getFullYear() + "-" + twoDigits(1 + this.getMonth()) + "-" + twoDigits(this.getDate()) + " " + twoDigits(this.getHours()) + ":" + twoDigits(this.getMinutes()) + ":" + twoDigits(this.getSeconds());
     };
     
     var app = angular.module('app', [
@@ -71,10 +71,15 @@
         $log.debug('Angular App is working!');
     });
 
-    app.controller('mainCtrl', function ($scope, $mdSidenav, $mdDialog) {
+    app.controller('mainCtrl', function ($scope, $window, $mdSidenav, $mdDialog) {
 
         $scope.toggleTodo = function () {
             $mdSidenav('left').toggle();
+        };
+
+        $scope.logout = function (event) {
+            console.log('no elo');
+            $window.location = '/logout';
         };
 
         $scope.showAlert = function (ev) {
@@ -183,8 +188,7 @@
             store.delete(todo);
         };
         
-        // Add geolocation set
-        // Put
+        // Add geolocation set (lat/long) from reminder.address
         $scope.setReminder = function (ev, todo) {
             $mdDialog.show({
                     controller: function ($scope, $mdDialog) {

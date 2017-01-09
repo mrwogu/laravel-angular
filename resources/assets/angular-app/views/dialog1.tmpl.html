@@ -28,16 +28,6 @@
                 </div>
 
                 <div ng-if="reminder.type == 'localization'">
-                    <div ng-hide="todo.latitude && todo.longitude">
-                        <h4>Adres miejsca przypomnienia</h4>
-                        <md-content layout-gt-sm="row" layout-padding>
-                            <md-input-container>
-                                <label>Adres</label>
-                                <input type="text" ng-model="reminder.address" />
-                            </md-input-container>
-                        </md-content>
-                    </div>
-
                     <h4>Współrzędne przypomnienia</h4>
                     <md-content layout-gt-sm="row" layout-padding>
                         <div>
